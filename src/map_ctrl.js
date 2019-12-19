@@ -234,7 +234,7 @@ export class MapCtrl extends MetricsPanelCtrl {
     this.points.map(coord => {
       latc += coord[0];
       longc += coord[1];
-      return 0;
+      return coord;
     });
 
     latc /= this.points.length;
