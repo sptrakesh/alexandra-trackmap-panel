@@ -92,10 +92,16 @@ export class MapCtrl extends MetricsPanelCtrl {
             if (l && l.type === "geo:json" && l.value && l.value.coordinates) {
               const coord = l.value.coordinates;
               this.points.push([coord[0], coord[1], 1]);
+            } else {
+              console.warn(`Invalid NGSIv2 data format ignored.\n${JSON.stringify(l)}`);
             }
           });
         }
+      } else {
+        console.warn(`Data type must be table.  Received ${data[0].type}`);
       }
+    } else {
+      console.warn(`Received data not of type array or empty\n${JSON.stringify(data)}`);
     }
 
     this.addLayer();
@@ -106,6 +112,9 @@ export class MapCtrl extends MetricsPanelCtrl {
       this.mapLayer.removeFrom(this.map);
       this.mapLayer = null;
     }
+
+    this.reCenterMap();
+
     if (this.points.length > 0) {
       if (this.panel.mode === this.modeTypes[0]) {
         this.mapLayer = leaflet.hexbinLayer(this.panel.hexbin).hoverHandler(leaflet.HexbinHoverHandler.tooltip());
@@ -214,6 +223,23 @@ export class MapCtrl extends MetricsPanelCtrl {
 
   centerMap() {
     this.map.setView(this.panel.mapOptions.latlon, this.panel.mapOptions.zoom);
+  }
+
+  reCenterMap() {
+    if (this.points.length === 0) return;
+
+    let latc = 0.0;
+    let longc = 0.0;
+
+    this.points.map(coord => {
+      latc += coord[0];
+      longc += coord[1];
+      return 0;
+    });
+
+    latc /= this.points.length;
+    longc /= this.points.length;
+    this.map.setView([latc, longc], this.panel.mapOptions.zoom);
   }
 
   createMinMaxVariables() {

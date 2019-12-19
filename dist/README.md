@@ -10,16 +10,54 @@
 ### Queries
 To use the plugin the data needs to be formatted as a table with either contains `location` in NGSIv2 format:
 ```javascript
-{
-  ...,
-  "location": {
-    "type": "geo:json",
-    "value": {
-      "coordinates": [55.96086,9.75394],
-      "type": "Point"
-    }
+[
+  {
+    "columns": [
+      {
+        "text": "location",
+        "type": "NGSIv2"
+      }
+    ],
+    "rows": [
+      [
+        {
+          "type": "geo:json",
+          "value": {
+            "type": "Point",
+            "coordinates": [
+              39.337361,
+              -76.7444637
+            ]
+          },
+          "metadata": {
+            "timestamp": {
+              "type": "DateTime",
+              "value": "2019-12-04T15:49:48.373Z"
+            }
+          }
+        }
+      ],
+      [
+        {
+          "type": "geo:json",
+          "value": {
+            "type": "Point",
+            "coordinates": [
+              39.2866544,
+              -76.5896193
+            ]
+          },
+          "metadata": {
+            "timestamp": {
+              "type": "DateTime",
+              "value": "2019-12-09T23:39:24.584Z"
+            }
+          }
+        }
+      ],
+    "type": "table"
   }
-}
+]
 ```
 Or simply a `lat` and `lon`.
 
