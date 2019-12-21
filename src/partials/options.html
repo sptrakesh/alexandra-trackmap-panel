@@ -126,6 +126,15 @@
       <span class="max-width-12">
         <input class="gf-form-input" ng-model="ctrl.panel.mapOptions.latlon[1]" ng-change="ctrl.centerMap()" />
       </span>
+      <div class="gf-form">
+        <label class="gf-form-label width-14">
+          Re-center map
+          <info-popover mode="right-normal" position="top center">
+            Automatically set the center of map based on location data from query.
+          </info-popover>
+        </label>
+        <gf-form-switch class="gf-form" title="reCenter" checked="ctrl.panel.mapOptions.reCenter"></gf-form-switch>
+      </div>
     </div>
     <div class="gf-form">
       <label class="gf-form-label width-14">
@@ -166,15 +175,6 @@
         </info-popover>
       </label>
       <gf-form-switch class="gf-form" title="updateOnMove" checked="ctrl.panel.mapOptions.updateOnMove"></gf-form-switch>
-    </div>
-    <div class="gf-form">
-      <label class="gf-form-label width-14">
-        Re-center map
-        <info-popover mode="right-normal" position="top center">
-          Automatically set the center of map based on location data from query.
-        </info-popover>
-      </label>
-      <gf-form-switch class="gf-form" title="reCenter" checked="ctrl.panel.mapOptions.reCenter"></gf-form-switch>
     </div>
   </div>
 </div>
