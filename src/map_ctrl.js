@@ -21,7 +21,8 @@ const panelDefaults = {
     attribution: "&copy; <a href='http://osm.org/copyright'>OpenSteetMap</a> contributors",
     maxZoom: 18,
     minMaxCoords: false,
-    updateOnMove: false
+    updateOnMove: false,
+    reCenter: false,
   },
   mode: 'Hexbin',
   hexbin: {
@@ -113,7 +114,9 @@ export class MapCtrl extends MetricsPanelCtrl {
       this.mapLayer = null;
     }
 
-    this.reCenterMap();
+    if (this.panel.mapOptions.reCenter) {
+      this.reCenterMap();
+    }
 
     if (this.points.length > 0) {
       if (this.panel.mode === this.modeTypes[0]) {
